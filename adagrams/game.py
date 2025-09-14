@@ -98,18 +98,30 @@ def score_word(word):
 
 
 def get_highest_word_score(word_list):
-    highest_word_score = tuple([])
-    loop_score = 0
     highest_score = 0
+    highest_score_word = ""
 
     for word in word_list:
+        total_score = 0
         for letter in word.upper():
-            loop_score += SCORE_CHART[letter]
-            if loop_score > highest_score:
-                highest_score = loop_score
-                highest_word_score([0]) = word
-                highest_word_score([1]) = highest_score
-    return highest_word_score
+            total_score += SCORE_CHART[letter]
+        if total_score > highest_score:
+            highest_score = total_score
+            highest_score_word = word
+        if total_score == highest_score:
+            if len(word) == 10 and len(highest_score_word) < 10:
+                highest_score_word = word
+            elif len(word) < len(highest_score_word):
+                highest_score_word = word
+            elif len(word) == len(highest_score_word):
+                continue
+
+    return tuple([highest_score_word, highest_score])
+
+
+
+
+
             
 
 
