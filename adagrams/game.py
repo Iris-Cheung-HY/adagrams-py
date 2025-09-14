@@ -41,16 +41,16 @@ SCORE_CHART = {
     'I': 1, 
     'J': 8, 
     'K': 5, 
-    'L': 4, 
+    'L': 1, 
     'M': 3, 
     'N': 1, 
     'O': 1, 
     'P': 3, 
-    'Q': 1, 
+    'Q': 10, 
     'R': 1, 
     'S': 1, 
     'T': 1, 
-    'U': 4, 
+    'U': 1, 
     'V': 4, 
     'W': 4, 
     'X': 8, 
@@ -105,16 +105,20 @@ def get_highest_word_score(word_list):
         total_score = 0
         for letter in word.upper():
             total_score += SCORE_CHART[letter]
+        if len(word) >= 7 and len(word) <= 10:
+            total_score += 8
         if total_score > highest_score:
             highest_score = total_score
             highest_score_word = word
         if total_score == highest_score:
             if len(word) == 10 and len(highest_score_word) < 10:
                 highest_score_word = word
-            elif len(word) < len(highest_score_word):
+            elif len(word) < 10 and len(highest_score_word) < 10 \
+                and len(word) < len(highest_score_word) :
                 highest_score_word = word
             elif len(word) == len(highest_score_word):
                 continue
+
 
     return tuple([highest_score_word, highest_score])
 
